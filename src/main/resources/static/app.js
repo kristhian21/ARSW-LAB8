@@ -1,3 +1,5 @@
+var points = [];
+
 var app = (function () {
 
     class Point{
@@ -27,6 +29,43 @@ var app = (function () {
         };
     };
 
+    function initMouse () {
+        console.info('Mouse initialized');
+        var canvas = document.getElementById("canvas"),
+            context = canvas.getContext("2d");
+        if (window.PointerEvent) {
+            canvas.addEventListener("pointerdown", DrawAndSend, false);
+        }
+    }
+
+    function DrawAndSend () {
+        console.info("Entrar a pintado")
+        var canvas = document.getElementById("canvas"),
+            context = canvas.getContext("2d");
+        var offsetleft = parseInt(getOffset(canvas).left, 10);
+        var offsettop = parseInt(getOffset(canvas).top, 10);
+        var x = event.pageX - offsetleft;
+        var y = event.pageY - offsettop;
+        var pt=new Point(x,y);
+        points.push(pt)
+        addPointToCanvas(pt);
+        stompClient.send("/topic/newpoint", {}, JSON.stringify(pt));
+    }
+
+    function getOffset (obj) {
+        var offsetLeft = 0;
+        var offsetTop = 0;
+        do {
+            if (!isNaN(obj.offsetLeft)) {
+                offsetLeft += obj.offsetLeft;
+            }
+            if (!isNaN(obj.offsetTop)) {
+                offsetTop += obj.offsetTop;
+            }
+        } while (obj = obj.offsetParent);
+        return { left: offsetLeft, top: offsetTop };
+    }
+
 
     var connectAndSubscribe = function () {
         console.info('Connecting to WS...');
@@ -38,8 +77,8 @@ var app = (function () {
             console.log('Connected: ' + frame);
             stompClient.subscribe('/topic/newpoint', function (eventbody) {
                 var point=JSON.parse(eventbody.body);
-                alert("X: " + point.x + ", Y: " + point.y);
-                
+                var newPoint = new Point(point.x, point.y);
+                addPointToCanvas(newPoint);
             });
         });
 
@@ -51,7 +90,8 @@ var app = (function () {
 
         init: function () {
             var can = document.getElementById("canvas");
-            
+            // Init Mouse
+            initMouse();
             //websocket connection
             connectAndSubscribe();
         },
