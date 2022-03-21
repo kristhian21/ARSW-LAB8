@@ -51,7 +51,9 @@ Para esto, realice lo siguiente:
 4. Ingrese los datos, ejecute la acción del botón, y verifique que en todas la pestañas se haya lanzado la alerta con los datos ingresados.
 
 ![](https://i.postimg.cc/XvRgPVY1/Microsoft-Teams-image-39.png)
+
 ![](https://i.postimg.cc/vB5vFp1Y/Microsoft-Teams-image-38.png)
+
 ![](https://i.postimg.cc/3N7FKnpg/Microsoft-Teams-image-37.png)
 
 5. Haga commit de lo realizado, para demarcar el avance de la parte 2.
@@ -67,6 +69,23 @@ Para hacer mas útil la aplicación, en lugar de capturar las coordenadas con ca
 
 1. Haga que el 'callback' asociado al tópico /topic/newpoint en lugar de mostrar una alerta, dibuje un punto en el canvas en las coordenadas enviadas con los eventos recibidos. Para esto puede [dibujar un círculo de radio 1](http://www.w3schools.com/html/html5_canvas.asp).
 4. Ejecute su aplicación en varios navegadores (y si puede en varios computadores, accediendo a la aplicación mendiante la IP donde corre el servidor). Compruebe que a medida que se dibuja un punto, el mismo es replicado en todas las instancias abiertas de la aplicación.
+
+![](https://i.postimg.cc/YCwGTh6W/Microsoft-Teams-image-36.png)
+
+![](https://i.postimg.cc/t4tZbpkm/Microsoft-Teams-image-40.png)
+
+![](https://i.postimg.cc/q7JtMSZB/Microsoft-Teams-image-41.png)
+
+![](https://i.postimg.cc/ydWk09Hw/Microsoft-Teams-image-42.png)
+
+![](https://i.postimg.cc/76cb96Pb/Microsoft-Teams-image-43.png)
+
+![](https://i.postimg.cc/nMfr8PDJ/Microsoft-Teams-image-44.png)
+
+![](https://i.postimg.cc/G3HMqhxR/Microsoft-Teams-image-45.png)
+
+![](https://i.postimg.cc/HWR6KD6y/Microsoft-Teams-image-46.png)
+
 
 5. Haga commit de lo realizado, para marcar el avance de la parte 2.
 
