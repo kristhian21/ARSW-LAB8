@@ -1,5 +1,12 @@
 ### Escuela Colombiana de Ingeniería
 ### Arquitecturas de Software - ARSW
+
+### Integrantes:
+
+- Eduardo Ospina 
+- Kristhian David Segura
+
+
 ### Laboratorio - Broker de Mensajes STOMP con WebSockets + HTML5 Canvas.
 
 
