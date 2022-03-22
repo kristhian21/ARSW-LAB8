@@ -50,7 +50,7 @@ var app = (function () {
         var pt=new Point(x,y);
         points.push(pt)
         addPointToCanvas(pt);
-        stompClient.send("/topic/newpoint."+actualDraw, {}, JSON.stringify(pt));
+        stompClient.send("/app/newpoint."+actualDraw, {}, JSON.stringify(pt));
     }
 
     function getOffset (obj) {
