@@ -8,19 +8,25 @@ var app = (function () {
             this.y=y;
         }        
     }
-    
+
+    class Polygon{
+        constructor(pointsCollection){
+            this.points = pointsCollection;
+        }
+    }
+
     var stompClient = null;
     var actualDraw;
 
-    var addPointToCanvas = function (point) {        
+    var addPointToCanvas = function (point) {
         var canvas = document.getElementById("canvas");
         var ctx = canvas.getContext("2d");
         ctx.beginPath();
         ctx.arc(point.x, point.y, 3, 0, 2 * Math.PI);
         ctx.stroke();
     };
-    
-    
+
+
     var getMousePosition = function (evt) {
         canvas = document.getElementById("canvas");
         var rect = canvas.getBoundingClientRect();
@@ -80,11 +86,31 @@ var app = (function () {
                 var newPoint = new Point(point.x, point.y);
                 addPointToCanvas(newPoint);
             });
+            stompClient.subscribe('/topic/newpolygon.'+drawNumber, function (eventbody){
+                var polygon = JSON.parse(eventbody.body);
+                var newPolygon = new Polygon(polygon.points);
+                drawPolygon(newPolygon);
+            });
         });
-
     };
-    
-    
+
+    var drawPolygon = function(polygon){
+        var canvas = document.getElementById("canvas");
+        var context = canvas.getContext("2d");
+        context.beginPath();
+        console.log("Pintando poligono #puntos: " + polygon.points.length);
+        for (let index = 0; index < polygon.points.length-1; index++) {
+            const element = polygon.points[index];
+            const nextElement = polygon.points[index+1];
+            context.moveTo(element.x, element.y)
+            context.lineTo(nextElement.x, nextElement.y);
+            context.stroke();
+        }
+        context.moveTo(polygon.points[polygon.points.length-1].x, polygon.points[polygon.points.length-1].y);
+        context.lineTo(polygon.points[0].x, polygon.points[0].y);
+        context.stroke();
+        context.closePath();
+    }
 
     return {
 
